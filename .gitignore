@@ -1,0 +1,17 @@
+MirrorDemo/Library/
+MirrorDemo/Temp/
+MirrorDemo/UserSettings/
+MirrorDemo/Logs/
+MirrorDemo/kcp2k.csproj
+MirrorDemo/Mirror.Authenticators.csproj
+MirrorDemo/Mirror.CompilerSymbols.csproj
+MirrorDemo/Mirror.Components.csproj
+MirrorDemo/Mirror.csproj
+MirrorDemo/Mirror.Editor.csproj
+MirrorDemo/Mirror.Examples.csproj
+MirrorDemo/Mirror.Transports.csproj
+MirrorDemo/MirrorDemo.sln
+MirrorDemo/SimpleWebTransport.csproj
+MirrorDemo/Telepathy.csproj
+MirrorDemo/Unity.Mirror.CodeGen.csproj
+MirrorDemo/.vscode/
