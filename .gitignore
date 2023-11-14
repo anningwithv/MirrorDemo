@@ -15,3 +15,9 @@ MirrorDemo/SimpleWebTransport.csproj
 MirrorDemo/Telepathy.csproj
 MirrorDemo/Unity.Mirror.CodeGen.csproj
 MirrorDemo/.vscode/
+MirrorDemo/obj/
+NetCodeDemo/.vscode/
+NetCodeDemo/Library/
+NetCodeDemo/Logs/
+NetCodeDemo/Temp/
+NetCodeDemo/UserSettings/

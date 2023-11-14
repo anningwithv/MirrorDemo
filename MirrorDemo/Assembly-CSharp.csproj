@@ -44,6 +44,7 @@
      <Compile Include="Assets\3rdPersonDemo\Mobile\Scripts\VirtualInputs\UIVirtualTouchZone.cs" />
      <Compile Include="Assets\3rdPersonDemo\Scripts\BasicRigidBodyPush.cs" />
      <Compile Include="Assets\3rdPersonDemo\Scripts\ThirdPersonController.cs" />
+     <Compile Include="Assets\NetworkDemo\Script\NetworkPlayerController.cs" />
      <None Include="Assets\Mirror\Version.txt" />
      <None Include="Assets\Mirror\Readme.txt" />
      <None Include="Assets\3rdPersonDemo\license.txt" />
