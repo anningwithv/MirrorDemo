@@ -1,8 +1,10 @@
 ﻿using System;
+using Cinemachine;
 using Cinemachine.Utility;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : NetworkBehaviour
 {
     public float Speed;
     public float VelocityDamping;
@@ -19,6 +21,14 @@ public class PlayerMove : MonoBehaviour
     Vector3 m_currentVleocity;
     float m_currentJumpSpeed;
     float m_restY;
+
+    private void Start()
+    {
+        if (IsOwner)
+        {
+            GameObject.Find("Camera").GetComponent<CinemachineVirtualCamera>().Follow = transform;
+        }
+    }
 
     private void Reset()
     {
@@ -41,6 +51,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
+
         Vector3 fwd;
         switch (InputForward)
         {
@@ -68,7 +80,7 @@ public class PlayerMove : MonoBehaviour
         {
             var qA = transform.rotation;
             var qB = Quaternion.LookRotation(
-                (InputForward == ForwardMode.Player && Vector3.Dot(fwd, m_currentVleocity) < 0) 
+                (InputForward == ForwardMode.Player && Vector3.Dot(fwd, m_currentVleocity) < 0)
                     ? -m_currentVleocity : m_currentVleocity);
             transform.rotation = Quaternion.Slerp(qA, qB, Damper.Damp(1, VelocityDamping, dt));
         }
