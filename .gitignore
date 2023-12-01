@@ -21,3 +21,8 @@ NetCodeDemo/Library/
 NetCodeDemo/Logs/
 NetCodeDemo/Temp/
 NetCodeDemo/UserSettings/
+MirrorDemo/.vs/
+MirrorDemo/.vsconfig
+MirrorDemo/spine-csharp.csproj
+MirrorDemo/spine-unity.csproj
+MirrorDemo/spine-unity-editor.csproj
