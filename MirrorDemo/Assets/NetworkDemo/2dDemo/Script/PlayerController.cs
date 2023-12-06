@@ -3,27 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : CharacterBase
 {
-    public GameObject FollowerPrefab;
-    public GameObject Bullet;
-
     public float MoveSpeed = 5;
 
     private Rigidbody2D m_Rgb; // 刚体组件
-    private PlayerWeaponController m_WeaponController;
-    private EnemyController m_AtkTarget;
     private int m_FollowerCount = 0;
     private int m_MaxFollowerCount = 5;
 
     public Vector3 MoveDir { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
-        m_WeaponController = GetComponentInChildren<PlayerWeaponController>();
+        base.Awake();
 
         m_Rgb = GetComponent<Rigidbody2D>(); // 获取刚体组件
-
     }
 
     public override void OnStartLocalPlayer()
@@ -34,7 +28,7 @@ public class PlayerController : NetworkBehaviour
         Camera.main.transform.SetParent(transform);
         Camera.main.transform.localPosition = new Vector3(0, 0, Camera.main.transform.position.z);
 
-        LevelController.Instance.AddFollower(transform);
+        LevelMgr.Instance.AddFollower(this);
     }
 
     //速度：每秒移动5个单位长度
@@ -90,44 +84,6 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    private void SearchTarget()
-    {
-        if (m_AtkTarget != null)
-            return;
-
-        var enemies = FindObjectsOfType<EnemyController>();
-        if (enemies.Length > 0)
-        {
-            m_AtkTarget = enemies[0];
-        }
-    }
-
-    private float m_LastAtkTime;
-    private void Fire()
-    {
-        if(m_AtkTarget == null) return;
-        
-        if (Time.time - m_LastAtkTime > 3)
-        {
-            m_LastAtkTime = Time.time;
-
-            Vector3 fireDir = m_AtkTarget.transform.position - transform.position;
-            fireDir.Normalize();
-
-            CmdFire(fireDir, transform.position);
-        }
-    }
-
-    [Command]
-    private void CmdFire(Vector3 dir, Vector3 position)
-    {
-        m_WeaponController.Fire(dir, position);
-        //GameObject go = GameObject.Instantiate(Bullet, position, Quaternion.identity);
-        //NetworkServer.Spawn(go);
-
-        //go.GetComponent<BulletController>().SetMoveDir(dir);
-    }
-
     private float m_LastAddFollowerTime;
     private void AddFollower()
     {
@@ -150,5 +106,17 @@ public class PlayerController : NetworkBehaviour
         GameObject follower = Instantiate(FollowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
         //follower.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
         NetworkServer.Spawn(follower, connectionToClient);//服务器孵化，同步客户端
+    }
+
+    private Vector3 m_LastMoveDir;
+    public override Vector3 GetMoveDir()
+    {
+        if (MoveDir != Vector3.zero)
+        {
+            m_LastMoveDir = MoveDir;
+            return m_LastMoveDir;
+        }
+
+        return m_LastMoveDir;
     }
 }

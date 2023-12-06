@@ -7,6 +7,7 @@ public class BulletController : NetworkBehaviour
 {
     private Vector3 m_MoveDir;
     private float m_Speed = 3;
+    private float m_Damage = 10;
 
     public void SetMoveDir(Vector3 dir)
     {
@@ -25,6 +26,7 @@ public class BulletController : NetworkBehaviour
         EnemyController enemy = collision.GetComponent<EnemyController>();
         if(enemy != null)
         {
+            enemy.OnAttacked(m_Damage);
             Destroy(gameObject);
         }
     }

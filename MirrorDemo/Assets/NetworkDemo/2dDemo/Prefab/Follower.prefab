@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6384840343540962182}
   - component: {fileID: 6384840343540962183}
   - component: {fileID: 6310273069222656536}
+  - component: {fileID: 95398161329094374}
   m_Layer: 0
   m_Name: Spine
   m_TagString: Untagged
@@ -160,6 +161,22 @@ MonoBehaviour:
   compressRotation: 0
   positionPrecision: 0.01
   scalePrecision: 0.01
+--- !u!114 &95398161329094374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6384840343540962177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1799ee9c51a9d7142b8fd4c128771894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  Bullet: {fileID: 3856034126474063961, guid: c75e0da2b56dd794c8d18c7285f4b5d9, type: 3}
 --- !u!1 &6384840344003344704
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,3 +301,4 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  FollowerPrefab: {fileID: 6384840344003344704}

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class LevelController : NetworkBehaviour
+public class LevelMgr : NetworkBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public static LevelController Instance;
+    public static LevelMgr Instance;
 
-    private List<Transform> m_FollowList;
+    private List<IFollowedTarget> m_FollowList;
 
     private void Awake()
     {
         Instance = this;
-        m_FollowList = new List<Transform>();
+        m_FollowList = new List<IFollowedTarget>();
     }
 
     #region Server
@@ -54,10 +54,15 @@ public class LevelController : NetworkBehaviour
 
     #region Client
 
-    public void AddFollower(Transform trans)
+    public void AddFollower(IFollowedTarget trans)
     {
         m_FollowList.Add(trans);
     }
 
+    public IFollowedTarget GetLastTarget()
+    {
+        int index = m_FollowList.Count - 1;
+        return m_FollowList[index];
+    }
     #endregion
 }

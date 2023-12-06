@@ -8,12 +8,14 @@ public class EnemyController : NetworkBehaviour
     private PlayerController m_Target;
     private float m_MoveSpeed = 1f;
     private Rigidbody2D m_Rigidbody;
+    private float m_CurHp;
 
     public override void OnStartServer()
     {
         base.OnStartServer();
 
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_CurHp = 50;
     }
 
     [ServerCallback]
@@ -24,6 +26,17 @@ public class EnemyController : NetworkBehaviour
     }
 
     #region Server
+    [Server]
+    public void OnAttacked(float damage)
+    {
+        m_CurHp -= damage;
+        if (m_CurHp < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    [Server]
     private void FindTaget()
     {
         if (m_Target == null)
@@ -36,6 +49,7 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
+    [Server]
     private void MoveToTarget()
     {
         if(m_Target == null)
