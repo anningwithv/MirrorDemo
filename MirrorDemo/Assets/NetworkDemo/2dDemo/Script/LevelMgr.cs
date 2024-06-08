@@ -9,12 +9,11 @@ public class LevelMgr : NetworkBehaviour
 
     public static LevelMgr Instance;
 
-    private List<IFollowedTarget> m_FollowList;
 
     private void Awake()
     {
         Instance = this;
-        m_FollowList = new List<IFollowedTarget>();
+
     }
 
     #region Server
@@ -28,7 +27,7 @@ public class LevelMgr : NetworkBehaviour
     {
         if (NetworkMgr.singleton.IsGameBegin)
         {
-            SpawnEnemies();
+            //SpawnEnemies();
         }
     }
 
@@ -54,15 +53,5 @@ public class LevelMgr : NetworkBehaviour
 
     #region Client
 
-    public void AddFollower(IFollowedTarget trans)
-    {
-        m_FollowList.Add(trans);
-    }
-
-    public IFollowedTarget GetLastTarget()
-    {
-        int index = m_FollowList.Count - 1;
-        return m_FollowList[index];
-    }
     #endregion
 }
