@@ -27,7 +27,7 @@ public class LevelMgr : NetworkBehaviour
     {
         if (NetworkMgr.singleton.IsGameBegin)
         {
-            //SpawnEnemies();
+            SpawnEnemies();
         }
     }
 
