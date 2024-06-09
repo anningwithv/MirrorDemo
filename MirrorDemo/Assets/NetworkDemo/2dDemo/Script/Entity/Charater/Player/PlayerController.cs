@@ -129,13 +129,13 @@ public class PlayerController : PlayerBase
     #endregion
 
     #region Command
-    [Command]
-    private void CmdSpawnFollower()
-    {
-        GameObject follower = Instantiate(FollowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-        //follower.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
-        NetworkServer.Spawn(follower, connectionToClient);//服务器孵化，同步客户端
-    }
+    //[Command]
+    //private void CmdSpawnFollower()
+    //{
+    //    GameObject follower = Instantiate(FollowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+    //    //follower.GetComponent<NetworkIdentity>().AssignClientAuthority(NetworkServer.localConnection);
+    //    NetworkServer.Spawn(follower, connectionToClient);//服务器孵化，同步客户端
+    //}
 
     [Command]
     private void CmdPlayAnim(string animName)
