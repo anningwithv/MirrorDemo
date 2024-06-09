@@ -267,5 +267,6 @@ MonoBehaviour:
   syncInterval: 0
   FollowerPrefab: {fileID: 6384840344003344704, guid: 087521457d281a4469697c078881399f,
     type: 3}
-  Bullet: {fileID: 3856034126474063961, guid: 74dad6dc898f3ab459a3be6f69c85ae8, type: 3}
   MoveSpeed: 5
+  TowerPrefab: {fileID: 5442891719809709660, guid: 7acf250d4af90a84c9cdda19c53fa781,
+    type: 3}

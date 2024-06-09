@@ -12,6 +12,7 @@ public enum PlayerState
 public class PlayerController : PlayerBase
 {
     public float MoveSpeed = 5;
+    public GameObject TowerPrefab;
 
     private Rigidbody2D m_Rgb; // 刚体组件
     //private int m_FollowerCount = 0;
@@ -51,6 +52,10 @@ public class PlayerController : PlayerBase
         SearchTarget();
         Fire();
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CmdSpawnTower();
+        }
         //AddFollower();
     }
 
@@ -120,6 +125,7 @@ public class PlayerController : PlayerBase
             }
         }
     }
+
     #endregion
 
     #region Command
@@ -135,6 +141,13 @@ public class PlayerController : PlayerBase
     private void CmdPlayAnim(string animName)
     {
         RpcPlayAnim(animName);
+    }
+
+    [Command]
+    private void CmdSpawnTower()
+    {
+        GameObject tower = Instantiate(TowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        NetworkServer.Spawn(tower, connectionToClient);//服务器孵化，同步客户端
     }
     #endregion
 
