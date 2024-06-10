@@ -13,6 +13,7 @@ public class NetworkMgr : NetworkManager
     private int m_PlayerNum;
 
     public bool IsGameBegin { get; private set; }
+    public Action OnGameBegin;
     // Overrides the base singleton so we don't
     // have to cast to this type everywhere.
     public static new NetworkMgr singleton => (NetworkMgr)NetworkManager.singleton;
@@ -138,8 +139,9 @@ public class NetworkMgr : NetworkManager
         m_PlayerNum++;
 
         if (m_PlayerNum >= 1)
-        { 
+        {
             IsGameBegin = true;
+            OnGameBegin?.Invoke();
         }
     }
 

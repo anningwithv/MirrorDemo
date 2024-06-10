@@ -10,6 +10,9 @@ public abstract class ServerSubMgr
         m_ServerGameMgr = ServerGameMgr.Instance;
     }
 
+    public virtual void OnGameBegin()
+    { 
+    }
     public abstract void Tick();
     public abstract void Clear();
 }

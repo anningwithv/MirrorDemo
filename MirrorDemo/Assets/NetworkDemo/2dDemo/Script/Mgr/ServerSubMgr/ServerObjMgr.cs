@@ -11,6 +11,12 @@ public class ServerObjMgr : ServerSubMgr
     public override void Init()
     {
         base.Init();
+        //m_ServerGameMgr.NetworkMgr.spawnPrefabs.Add(bullet);
+    }
+
+    public override void OnGameBegin()
+    {
+        base.OnGameBegin();
 
         string path1 = $"{m_ObjPath}Bullet";
         GameObject bullet = Resources.Load(path1) as GameObject;
@@ -33,7 +39,6 @@ public class ServerObjMgr : ServerSubMgr
         NetworkClient.RegisterPrefab(bullet2);
         GameObjectPoolMgr.S.AddPool(bullet2.name, bullet2, 100, 10);
 
-        //m_ServerGameMgr.NetworkMgr.spawnPrefabs.Add(bullet);
     }
 
     public override void Tick()

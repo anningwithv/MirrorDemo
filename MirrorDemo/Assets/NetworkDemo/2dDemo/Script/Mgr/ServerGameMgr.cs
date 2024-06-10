@@ -32,6 +32,7 @@ public class ServerGameMgr : NetworkBehaviour
     private void Init()
     {
         NetworkMgr = FindObjectOfType<NetworkMgr>();
+        NetworkMgr.OnGameBegin = OnGameBegin;
         EntityRoot = transform.Find("EntityRoot");
 
         InitSubMgrs();
@@ -47,7 +48,13 @@ public class ServerGameMgr : NetworkBehaviour
         serverObjMgr.Init();
     }
 
-
+    private void OnGameBegin()
+    {
+        foreach (var subMgr in m_SubMgrDic.Values)
+        {
+            subMgr.OnGameBegin();
+        }
+    }
     #endregion
 
     #region Update
