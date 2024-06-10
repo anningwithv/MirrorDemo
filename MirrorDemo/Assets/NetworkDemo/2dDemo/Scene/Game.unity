@@ -811,8 +811,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPrefabs.Array.data[5]
       value: 
-      objectReference: {fileID: 5442891719809709660, guid: 7acf250d4af90a84c9cdda19c53fa781,
-        type: 3}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60b54964bbddc3e45910f82e0621ee52, type: 3}
 --- !u!1 &1530986617

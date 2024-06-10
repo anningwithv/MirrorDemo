@@ -33,7 +33,7 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
         Instance = this;
 
         NetworkMgr = FindObjectOfType<NetworkMgr>();
-        NetworkMgr.OnGameBegin = OnGameBegin;
+        NetworkMgr.OnGameBegin += OnGameBegin;
         EntityRoot = transform.Find("CommonEntityRoot");
         m_IsGameBegin = false;
 

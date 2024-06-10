@@ -26,7 +26,7 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
     private void Init()
     {
         NetworkMgr = FindObjectOfType<NetworkMgr>();
-        NetworkMgr.OnGameBegin = OnGameBegin;
+        NetworkMgr.OnGameBegin += OnGameBegin;
         EntityRoot = transform.Find("ServerEntityRoot");
         m_IsGameBegin = false;
 
