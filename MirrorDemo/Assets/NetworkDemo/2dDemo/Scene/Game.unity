@@ -232,7 +232,7 @@ Transform:
   - {fileID: 1948245395}
   - {fileID: 319721706}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &690372057
 PrefabInstance:
@@ -432,7 +432,7 @@ Transform:
   - {fileID: 1530986618}
   - {fileID: 1019665386}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &884517030
 MonoBehaviour:
