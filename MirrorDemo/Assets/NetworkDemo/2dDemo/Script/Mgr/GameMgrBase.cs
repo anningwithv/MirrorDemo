@@ -17,7 +17,9 @@ public class GameMgrBase<T> : NetworkBehaviour
     public T AddSubMgr<T>() where T : ISubMgr, new()
     {
         T mgr = new T();
-        m_SubMgrDic.Add(typeof(T).GetHashCode(), mgr);
+        int key = typeof(T).GetHashCode();
+        if (!m_SubMgrDic.ContainsKey(key))
+            m_SubMgrDic.Add(key, mgr);
         return mgr;
     }
 

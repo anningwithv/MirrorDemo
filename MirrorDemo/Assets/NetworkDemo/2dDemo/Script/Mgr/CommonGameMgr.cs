@@ -13,15 +13,25 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 
 
     #region Init
-    public void Awake()
+
+    public override void OnStartServer()
     {
-        Instance = this;
+        base.OnStartServer();
+
+        Init();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
 
         Init();
     }
 
     private void Init()
     {
+        Instance = this;
+
         NetworkMgr = FindObjectOfType<NetworkMgr>();
         NetworkMgr.OnGameBegin = OnGameBegin;
         EntityRoot = transform.Find("CommonEntityRoot");
