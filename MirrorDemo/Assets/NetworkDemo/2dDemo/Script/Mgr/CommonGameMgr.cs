@@ -42,8 +42,15 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 
     private void InitSubMgrs()
     {
-        CommonObjMgr commonObjMgr = AddSubMgr<CommonObjMgr>();
+        //CommonObjMgr commonObjMgr = AddSubMgr<CommonObjMgr>();
+        //commonObjMgr.Init();
+
+        CommonObjMgr commonObjMgr = new CommonObjMgr();
         commonObjMgr.Init();
+
+        int key = typeof(CommonObjMgr).GetHashCode();
+        if (!m_SubMgrDic.ContainsKey(key))
+            m_SubMgrDic.Add(key, commonObjMgr);
     }
 
     private void OnGameBegin()
