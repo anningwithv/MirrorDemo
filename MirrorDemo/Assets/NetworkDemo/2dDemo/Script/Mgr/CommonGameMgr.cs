@@ -48,11 +48,11 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 
     private void OnGameBegin()
     {
-        m_IsGameBegin = true;
         foreach (var subMgr in m_SubMgrDic.Values)
         {
             subMgr.OnGameBegin();
         }
+        m_IsGameBegin = true;
     }
     #endregion
 

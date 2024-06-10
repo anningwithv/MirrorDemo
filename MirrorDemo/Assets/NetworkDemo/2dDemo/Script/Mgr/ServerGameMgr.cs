@@ -45,11 +45,11 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
 
     private void OnGameBegin()
     {
-        m_IsGameBegin = true;
         foreach (var subMgr in m_SubMgrDic.Values)
         {
             subMgr.OnGameBegin();
         }
+        m_IsGameBegin = true;
     }
     #endregion
 

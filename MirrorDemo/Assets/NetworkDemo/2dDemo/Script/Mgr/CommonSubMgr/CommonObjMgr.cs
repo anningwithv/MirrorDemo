@@ -12,12 +12,26 @@ public class CommonObjMgr : CommonSubMgr
     {
         base.Init();
         //m_ServerGameMgr.NetworkMgr.spawnPrefabs.Add(bullet);
+        InitPools();
     }
 
     public override void OnGameBegin()
     {
         base.OnGameBegin();
 
+       
+    }
+
+    public override void Tick()
+    {
+    }
+
+    public override void Clear()
+    {
+    }
+
+    private void InitPools()
+    {
         string path1 = $"{m_ObjPath}Bullet";
         GameObject bullet = Resources.Load(path1) as GameObject;
         //NetworkClient.RegisterPrefab(bullet, SpawnHandler, UnspawnHandler);
@@ -38,17 +52,7 @@ public class CommonObjMgr : CommonSubMgr
         GameObject bullet2 = Resources.Load(path4) as GameObject;
         NetworkClient.RegisterPrefab(bullet2);
         GameObjectPoolMgr.S.AddPool(bullet2.name, bullet2, 100, 10);
-
     }
-
-    public override void Tick()
-    {
-    }
-
-    public override void Clear()
-    {
-    }
-
     //private GameObject SpawnHandler(SpawnMessage msg)
     //{
     //    return GetFromPool(msg.position, msg.rotation);
