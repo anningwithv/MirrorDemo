@@ -4,42 +4,35 @@ using UnityEngine;
 using Mirror;
 
 /// <summary>
-/// Game mgr only run in server
+/// Game mgr only run in both server and client
 /// </summary>
-public class ServerGameMgr : GameMgrBase<ServerGameMgr>
+public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 {
     public NetworkMgr NetworkMgr { get; private set; }
     public Transform EntityRoot { get; private set; }
 
 
     #region Init
-    public override void OnStartServer()
+    public void Awake()
     {
-        base.OnStartServer();
-
         Instance = this;
 
         Init();
     }
 
-    [Server]
     private void Init()
     {
         NetworkMgr = FindObjectOfType<NetworkMgr>();
         NetworkMgr.OnGameBegin = OnGameBegin;
-        EntityRoot = transform.Find("ServerEntityRoot");
+        EntityRoot = transform.Find("CommonEntityRoot");
 
         InitSubMgrs();
     }
 
-    [Server]
     private void InitSubMgrs()
     {
-        ServerEnemyMgr serverEnemyMgr = AddSubMgr<ServerEnemyMgr>();
-        serverEnemyMgr.Init();
-
-        CommonObjMgr serverObjMgr = AddSubMgr<CommonObjMgr>();
-        serverObjMgr.Init();
+        CommonObjMgr commonObjMgr = AddSubMgr<CommonObjMgr>();
+        commonObjMgr.Init();
     }
 
     private void OnGameBegin()
@@ -52,7 +45,7 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
     #endregion
 
     #region Update
-    [Server]
+
     private void Update()
     {
         if (!NetworkMgr.singleton.IsGameBegin)

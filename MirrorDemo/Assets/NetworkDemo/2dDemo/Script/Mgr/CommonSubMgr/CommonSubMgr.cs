@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ServerSubMgr : ISubMgr
+public abstract class CommonSubMgr : ISubMgr
 {
-    protected ServerGameMgr m_ServerGameMgr;
+    protected ServerGameMgr m_GameMgr;
 
     public virtual void Init() {
-        m_ServerGameMgr = ServerGameMgr.Instance;
+        m_GameMgr = ServerGameMgr.Instance;
     }
 
     public virtual void OnGameBegin()

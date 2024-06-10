@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerObjMgr : ServerSubMgr
+public class CommonObjMgr : CommonSubMgr
 {
     private string m_ObjPath = "Prefab/";
 
