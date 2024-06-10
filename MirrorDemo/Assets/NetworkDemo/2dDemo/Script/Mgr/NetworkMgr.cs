@@ -138,7 +138,7 @@ public class NetworkMgr : NetworkManager
     {
         m_PlayerNum++;
 
-        if (m_PlayerNum >= 1)
+        if (m_PlayerNum > 1)
         {
             IsGameBegin = true;
             OnGameBegin?.Invoke();
