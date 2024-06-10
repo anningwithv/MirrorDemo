@@ -12,7 +12,7 @@ public class CommonObjMgr : CommonSubMgr
     {
         base.Init();
         //m_ServerGameMgr.NetworkMgr.spawnPrefabs.Add(bullet);
-        InitPools();
+        //InitPools();
     }
 
     public override void OnGameBegin()

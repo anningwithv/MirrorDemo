@@ -46,11 +46,15 @@ public class ServerEnemyMgr : ServerSubMgr
             for (int i = 0; i < count; i++)
             {
                 Vector3 pos = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), 0);
-                GameObject go = GameObjectPoolMgr.S.Allocate("Enemy") ;
+                //GameObject go = GameObjectPoolMgr.S.Allocate("Enemy") ;
+
+                string path3 = $"Prefab/Enemy";
+                GameObject enemy = Resources.Load(path3) as GameObject;
+                GameObject go = GameObject.Instantiate(enemy) as GameObject;
                 go.transform.parent = m_ServerGameMgr.EntityRoot;
                 go.transform.position = pos;
                 go.SetActive(true);
-                //NetworkServer.Spawn(go);
+                NetworkServer.Spawn(go);
             }
         }
     }
