@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using GameFrame;
 
 /// <summary>
 /// Enemy is Server obj
@@ -35,7 +36,8 @@ public class EnemyController : NetworkBehaviour
         m_CurHp -= damage;
         if (m_CurHp < 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            GameObjectPoolMgr.S.Recycle(gameObject);
         }
     }
 
