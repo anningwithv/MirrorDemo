@@ -10,7 +10,7 @@ public class GameMgrBase<T> : NetworkBehaviour
     public static T Instance;
 
     protected Dictionary<int, ISubMgr> m_SubMgrDic = new();
-
+    protected bool m_IsGameBegin;
     #region Tool Func
 
     [Server]

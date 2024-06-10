@@ -35,6 +35,7 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
         NetworkMgr = FindObjectOfType<NetworkMgr>();
         NetworkMgr.OnGameBegin = OnGameBegin;
         EntityRoot = transform.Find("CommonEntityRoot");
+        m_IsGameBegin = false;
 
         InitSubMgrs();
     }
@@ -47,6 +48,7 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 
     private void OnGameBegin()
     {
+        m_IsGameBegin = true;
         foreach (var subMgr in m_SubMgrDic.Values)
         {
             subMgr.OnGameBegin();
@@ -58,7 +60,7 @@ public class CommonGameMgr : GameMgrBase<CommonGameMgr>
 
     private void Update()
     {
-        if (!NetworkMgr.singleton.IsGameBegin)
+        if (!m_IsGameBegin)
             return;
 
         foreach (var subMgr in m_SubMgrDic.Values)

@@ -7,10 +7,13 @@ using UnityEngine;
 public class ServerEnemyMgr : ServerSubMgr
 {
     private float m_LastSpawnTime;
+    private bool m_StartSpawnEnemy;
 
     public override void Init()
     {
         base.Init();
+
+        m_StartSpawnEnemy = false;
     }
 
     public override void OnGameBegin()
@@ -18,10 +21,14 @@ public class ServerEnemyMgr : ServerSubMgr
         base.OnGameBegin();
 
         m_LastSpawnTime = Time.time;
+        m_StartSpawnEnemy = true;
     }
 
     public override void Tick()
     {
+        if (!m_StartSpawnEnemy)
+            return;
+
         SpawnEnemies();
     }
 

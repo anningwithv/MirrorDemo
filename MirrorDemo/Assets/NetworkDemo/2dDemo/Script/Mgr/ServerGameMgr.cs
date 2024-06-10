@@ -28,6 +28,7 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
         NetworkMgr = FindObjectOfType<NetworkMgr>();
         NetworkMgr.OnGameBegin = OnGameBegin;
         EntityRoot = transform.Find("ServerEntityRoot");
+        m_IsGameBegin = false;
 
         InitSubMgrs();
     }
@@ -44,6 +45,7 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
 
     private void OnGameBegin()
     {
+        m_IsGameBegin = true;
         foreach (var subMgr in m_SubMgrDic.Values)
         {
             subMgr.OnGameBegin();
@@ -55,7 +57,7 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
     [Server]
     private void Update()
     {
-        if (!NetworkMgr.singleton.IsGameBegin)
+        if (!m_IsGameBegin)
             return;
 
         foreach (var subMgr in m_SubMgrDic.Values)
