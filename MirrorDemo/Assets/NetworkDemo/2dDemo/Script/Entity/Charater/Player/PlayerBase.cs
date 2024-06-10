@@ -40,7 +40,7 @@ public class PlayerBase : NetworkBehaviour
     {
         if (m_AtkTarget == null) return;
 
-        if (Time.time - m_LastAtkTime > 3)
+        //if (Time.time - m_LastAtkTime > 3)
         {
             m_LastAtkTime = Time.time;
 

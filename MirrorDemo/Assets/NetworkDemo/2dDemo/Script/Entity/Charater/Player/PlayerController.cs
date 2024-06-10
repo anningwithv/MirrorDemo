@@ -50,11 +50,16 @@ public class PlayerController : PlayerBase
         Move();
 
         SearchTarget();
-        Fire();
+        //Fire();
 
         if (Input.GetKeyDown(KeyCode.P))
         {
             CmdSpawnTower();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Fire();
         }
         //AddFollower();
     }
