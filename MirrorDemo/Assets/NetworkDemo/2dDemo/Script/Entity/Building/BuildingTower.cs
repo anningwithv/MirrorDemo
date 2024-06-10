@@ -7,7 +7,7 @@ public class BuildingTower : BuildingBase
 {
     public GameObject BulletPrefab;
     protected float m_LastAtkTime;
-    protected PlayerController m_AtkTarget;
+    protected EnemyController m_AtkTarget;
     [Server]
     protected override void OnStart()
     {
@@ -38,7 +38,7 @@ public class BuildingTower : BuildingBase
         if (m_AtkTarget != null)
             return;
 
-        var enemies = FindObjectsOfType<PlayerController>();
+        var enemies = FindObjectsOfType<EnemyController>();
         if (enemies.Length > 0)
         {
             m_AtkTarget = enemies[0];

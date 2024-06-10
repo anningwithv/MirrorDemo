@@ -171,6 +171,7 @@ public class NetworkMgr : NetworkManager
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         base.OnServerDisconnect(conn);
+
     }
 
     /// <summary>
