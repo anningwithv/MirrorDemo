@@ -51,7 +51,7 @@ public class ServerEnemyMgr : ServerSubMgr
                 string path3 = $"Prefab/Enemy";
                 GameObject enemy = Resources.Load(path3) as GameObject;
                 GameObject go = GameObject.Instantiate(enemy) as GameObject;
-                go.transform.parent = m_ServerGameMgr.EntityRoot;
+                //go.transform.parent = m_ServerGameMgr.EntityRoot;
                 go.transform.position = pos;
                 go.SetActive(true);
                 NetworkServer.Spawn(go);
