@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class GameMgrBase<T> : NetworkBehaviour
+public class GameMgrBase<K> : NetworkBehaviour
 {
     //public GameObject EnemyPrefab;
 
-    public static T Instance;
+    public static K Instance;
 
     protected Dictionary<int, ISubMgr> m_SubMgrDic = new();
     protected bool m_IsGameBegin;
