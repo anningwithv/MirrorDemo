@@ -13,6 +13,13 @@ public class ServerEnemyMgr : ServerSubMgr
         base.Init();
     }
 
+    public override void OnGameBegin()
+    {
+        base.OnGameBegin();
+
+        m_LastSpawnTime = Time.time;
+    }
+
     public override void Tick()
     {
         SpawnEnemies();
