@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using GameFrame;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/components/network-manager
@@ -41,6 +42,28 @@ public class NetworkMgr : NetworkManager
     public override void Start()
     {
         base.Start();
+
+        string m_ObjPath = "Prefab/";
+        string path1 = $"{m_ObjPath}Bullet";
+        GameObject bullet = Resources.Load(path1) as GameObject;
+        //NetworkClient.RegisterPrefab(bullet, SpawnHandler, UnspawnHandler);
+        NetworkClient.RegisterPrefab(bullet);
+        //GameObjectPoolMgr.S.AddPool(bullet.name, bullet, 100, 10);
+
+        string path2 = $"{m_ObjPath}BulletTower";
+        GameObject bulletTower = Resources.Load(path2) as GameObject;
+        NetworkClient.RegisterPrefab(bulletTower);
+        //GameObjectPoolMgr.S.AddPool(bulletTower.name, bulletTower, 100, 10);
+
+        string path3 = $"{m_ObjPath}Enemy";
+        GameObject enemy = Resources.Load(path3) as GameObject;
+        NetworkClient.RegisterPrefab(enemy);
+        //GameObjectPoolMgr.S.AddPool(enemy.name, enemy, 100, 10);
+
+        string path4 = $"{m_ObjPath}Bullet2";
+        GameObject bullet2 = Resources.Load(path4) as GameObject;
+        NetworkClient.RegisterPrefab(bullet2);
+        //GameObjectPoolMgr.S.AddPool(bullet2.name, bullet2, 100, 10);
     }
 
     /// <summary>
