@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Spine.Unity;
+using GameFrame;
 
 public enum PlayerState
 {
@@ -151,7 +152,9 @@ public class PlayerController : PlayerBase
     [Command]
     private void CmdSpawnTower()
     {
-        GameObject tower = Instantiate(TowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        //GameObject tower = Instantiate(TowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
+        GameObject tower = GameObjectPoolMgr.S.Allocate(ObjUtil.TowerAssetId);
+        tower.transform.parent = ServerGameMgr.Instance.EntityRoot;
         NetworkServer.Spawn(tower, connectionToClient);//服务器孵化，同步客户端
     }
     #endregion
