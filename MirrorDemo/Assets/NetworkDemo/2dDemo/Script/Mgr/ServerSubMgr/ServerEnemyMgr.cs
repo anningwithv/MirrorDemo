@@ -52,7 +52,8 @@ public class ServerEnemyMgr : ServerSubMgr
                 //GameObject enemy = Resources.Load(path3) as GameObject;
                 //GameObject go = GameObject.Instantiate(enemy) as GameObject;
                 //go.transform.parent = m_ServerGameMgr.EntityRoot;
-                GameObject go = GameObjectPoolMgr.S.Allocate(ObjUtil.EnemyAssetId);
+                string assetId = ObjUtil.GetAssetId("Enemy");
+                GameObject go = GameObjectPoolMgr.S.Allocate(assetId);
                 go.transform.parent = m_ServerGameMgr.EntityRoot;
                 go.transform.position = pos;
                 go.SetActive(true);

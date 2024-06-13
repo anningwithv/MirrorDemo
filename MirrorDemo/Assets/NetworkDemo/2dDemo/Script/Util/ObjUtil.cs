@@ -4,23 +4,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.VersionControl;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public static class ObjUtil
 {
-    public static string EnemyAssetId;
-    public static string BulletAssetId;
-    public static string BulletTowerAssetId;
-    public static string Bullet2AssetId;
-    public static string TowerAssetId;
+    //public static string EnemyAssetId;
+    //public static string BulletAssetId;
+    //public static string BulletTowerAssetId;
+    //public static string Bullet2AssetId;
+    //public static string TowerAssetId;
+
+    public static Dictionary<string, string> AssetDic = new();
 
     private static string m_ObjPath = "Prefab/";
+
     public static void RegisterPrefabs()
     {
-        BulletAssetId = RegisterPrefab("Bullet", 100, 10);
-        BulletTowerAssetId = RegisterPrefab("BulletTower", 100, 10);
-        EnemyAssetId = RegisterPrefab("Enemy", 100, 10);
-        Bullet2AssetId = RegisterPrefab("Bullet2", 100, 10);
-        TowerAssetId = RegisterPrefab("Tower", 100, 10);
+        //TODO: get list from table config
+        List<string> prefabNameList = new()
+        {
+            "Bullet",
+            "BulletTower",
+            "Enemy",
+            "Bullet2",
+            "BuildingTower"
+        };
+
+        foreach (var item in prefabNameList)
+        {
+            AssetDic[item] = RegisterPrefab(item, 100, 10);
+        }
+
+        //BulletAssetId = RegisterPrefab("Bullet", 100, 10);
+        //BulletTowerAssetId = RegisterPrefab("BulletTower", 100, 10);
+        //EnemyAssetId = RegisterPrefab("Enemy", 100, 10);
+        //Bullet2AssetId = RegisterPrefab("Bullet2", 100, 10);
+        //TowerAssetId = RegisterPrefab("BuildingTower", 100, 10);
 
         //string path1 = $"{m_ObjPath}Bullet";
         //GameObject bullet = Resources.Load(path1) as GameObject;
@@ -56,6 +75,14 @@ public static class ObjUtil
         //var towerAssetId = tower.GetComponent<NetworkIdentity>().assetId;
         //GameObjectPoolMgr.S.AddPool(towerAssetId.ToString(), tower, 100, 10);
         //TowerAssetId = towerAssetId.ToString();
+    }
+
+    public static string GetAssetId(string name)
+    {
+        if(AssetDic.ContainsKey(name))
+            return AssetDic[name];
+
+        return string.Empty;
     }
 
     private static string RegisterPrefab(string path, int maxCount, int initCount)

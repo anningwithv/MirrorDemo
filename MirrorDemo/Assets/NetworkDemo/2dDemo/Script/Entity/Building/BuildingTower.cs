@@ -50,7 +50,9 @@ public class BuildingTower : BuildingBase
     protected void Fire(Vector3 dir, Vector3 position)
     {
         //GameObject go = GameObject.Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-        GameObject go = GameObjectPoolMgr.S.Allocate(ObjUtil.BulletTowerAssetId);
+        //GameObject go = GameObjectPoolMgr.S.Allocate(ObjUtil.BulletTowerAssetId);
+        string assetId = ObjUtil.GetAssetId("BulletTower");
+        GameObject go = GameObjectPoolMgr.S.Allocate(assetId);
         go.transform.parent = ServerGameMgr.Instance.EntityRoot;
         go.transform.position = transform.position;
 

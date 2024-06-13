@@ -21,7 +21,8 @@ public class PlayerWeaponController : NetworkBehaviour
     public void Fire(Vector3 dir, Vector3 position)
     {
         //GameObject go = GameObject.Instantiate(Bullet, transform.position, Quaternion.identity);
-        GameObject go = GameObjectPoolMgr.S.Allocate(ObjUtil.BulletAssetId);
+        string assetId = ObjUtil.GetAssetId("Bullet");
+        GameObject go = GameObjectPoolMgr.S.Allocate(assetId);
         go.transform.parent = ServerGameMgr.Instance.EntityRoot;
         go.transform.position = position;
         go.GetComponent<BulletController>().SetMoveDir(dir);

@@ -153,9 +153,11 @@ public class PlayerController : PlayerBase
     private void CmdSpawnTower()
     {
         //GameObject tower = Instantiate(TowerPrefab, transform.position + new Vector3(1, 0, 0), Quaternion.identity);
-        GameObject tower = GameObjectPoolMgr.S.Allocate(ObjUtil.TowerAssetId);
-        tower.transform.parent = ServerGameMgr.Instance.EntityRoot;
-        NetworkServer.Spawn(tower, connectionToClient);//服务器孵化，同步客户端
+        //GameObject tower = GameObjectPoolMgr.S.Allocate(ObjUtil.TowerAssetId);
+        string assetId = ObjUtil.GetAssetId("BuildingTower");
+        GameObject go = GameObjectPoolMgr.S.Allocate(assetId);
+        go.transform.parent = ServerGameMgr.Instance.EntityRoot;
+        NetworkServer.Spawn(go, connectionToClient);//服务器孵化，同步客户端
     }
     #endregion
 
