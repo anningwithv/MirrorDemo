@@ -53,8 +53,7 @@ namespace ProjectX.Logic
 
        
         //private StringBuilder m_AnimNameBuilder = new StringBuilder();
-        [ClientRpc]
-        public TrackEntry PlayAnim(string animName, bool loop, float speed = 1)
+        private TrackEntry PlayAnim(string animName, bool loop, float speed = 1)
         {
             if (m_SpineAnim == null)
                 return null;
@@ -90,6 +89,7 @@ namespace ProjectX.Logic
             return track;
         }
 
+        [ClientRpc]
         public void PauseAnim()
         {
             //m_Animator.speed = 0;
@@ -97,6 +97,7 @@ namespace ProjectX.Logic
                 m_SpineAnim.AnimationState.TimeScale = 0;
         }
 
+        [ClientRpc]
         public void ResumeAnim()
         {
             //m_Animator.speed = 1;
@@ -104,6 +105,7 @@ namespace ProjectX.Logic
                 m_SpineAnim.AnimationState.TimeScale = 1;
         }
 
+        [ClientRpc]
         public void PlayIdleAnim()
         {
             if (!m_Controller.IsAlive())
@@ -111,6 +113,7 @@ namespace ProjectX.Logic
             PlayAnim(m_AnimPrefix + m_IdleAnimName, true);
         }
 
+        [ClientRpc]
         public void PlayMoveAnim()
         {
             if (!m_Controller.IsAlive())
@@ -118,6 +121,7 @@ namespace ProjectX.Logic
             PlayAnim(m_AnimPrefix + m_MoveAnimName, true);
         }
 
+        [ClientRpc]
         private void PlayDeadAnim()
         {
             //Log.i("Enemy play dead anim");
@@ -125,6 +129,7 @@ namespace ProjectX.Logic
             PlayAnim(m_AnimPrefix + "Die", false);
         }
 
+        [ClientRpc]
         public void PlayAttackAnim(Action onAtkTriggered, Action onEnd)
         {
             if (!m_Controller.IsAlive())
