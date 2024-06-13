@@ -27,6 +27,8 @@ public class PlayerController : CharacterController
     {
         base.Awake();
 
+        HealthCom.InitHealth(100);
+
         m_WeaponController = GetComponentInChildren<PlayerWeaponController>();
 
         //m_Spine = GetComponentInChildren<SkeletonAnimation>();

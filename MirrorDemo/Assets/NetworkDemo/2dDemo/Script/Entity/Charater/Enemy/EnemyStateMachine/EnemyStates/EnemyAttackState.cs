@@ -64,7 +64,8 @@ namespace ProjectX.Logic
 
             Vector3 dir = target.transform.position - entity.transform.position;
             entity.FaceToDir(dir);
-            //entity.StopMove();
+            entity.StopMove();
+
             entity.AnimCom.PlayAttackAnim(() =>
             {
                 if (target == null)

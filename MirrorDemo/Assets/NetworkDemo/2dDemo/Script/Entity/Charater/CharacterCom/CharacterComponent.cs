@@ -16,7 +16,7 @@ namespace ProjectX.Logic
         public CharacterComponent()
         { }
 
-        public void SetOwner(ICharacterComOwner owner)
+        public virtual void SetOwner(ICharacterComOwner owner)
         { m_Owner = owner; }    
 
         public virtual void OnAwake()

@@ -143,6 +143,11 @@ public abstract class CharacterController : NetworkBehaviour, ICharacterComOwner
         FaceToDir(dir);
     }
 
+    public void StopMove()
+    {
+        Rgb.velocity = Vector2.zero;
+    }
+
     public void FaceToDir(Vector3 dir)
     {
         if (dir.x > 0 && !m_IsFacingRight)

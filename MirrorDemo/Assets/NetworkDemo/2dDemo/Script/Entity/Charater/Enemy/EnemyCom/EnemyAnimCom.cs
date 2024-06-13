@@ -104,14 +104,14 @@ namespace ProjectX.Logic
 
         public void PlayIdleAnim()
         {
-            if (!m_EnemyController.IsAlive())
+            if (!m_Controller.IsAlive())
                 return;
             PlayAnim(m_AnimPrefix + m_IdleAnimName, true);
         }
 
         public void PlayMoveAnim()
         {
-            if (!m_EnemyController.IsAlive())
+            if (!m_Controller.IsAlive())
                 return;
             PlayAnim(m_AnimPrefix + m_MoveAnimName, true);
         }
@@ -125,7 +125,7 @@ namespace ProjectX.Logic
 
         public void PlayAttackAnim(Action onAtkTriggered, Action onEnd)
         {
-            if (!m_EnemyController.IsAlive())
+            if (!m_Controller.IsAlive())
                 return;
 
             var track = PlayAnim(m_AnimPrefix + "Attack", false, 1.5f);
