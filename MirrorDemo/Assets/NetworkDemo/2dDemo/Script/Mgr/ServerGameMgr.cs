@@ -13,11 +13,14 @@ public class ServerGameMgr : GameMgrBase<ServerGameMgr>
 
 
     #region Init
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public override void OnStartServer()
     {
         base.OnStartServer();
-
-        Instance = this;
 
         Init();
     }
