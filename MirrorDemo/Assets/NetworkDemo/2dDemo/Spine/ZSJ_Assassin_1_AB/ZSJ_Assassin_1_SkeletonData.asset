@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: xiandai_leader_SkeletonData
+  m_Name: ZSJ_Assassin_1_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 663e82e557588cf4aa7bbe0d3a472111, type: 2}
+  - {fileID: 11400000, guid: 599e2d3de9889884f827489725f3b071, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 7d488c36ec6c3b542af38ecf7a78c6e7, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: c8109ca583cd40f47b409ba84afda305, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 1
+    requiresBlendModeMaterials: 0
     applyAdditiveMaterial: 1
-    additiveMaterials:
-    - pageName: xiandai_leader.png
-      material: {fileID: 2100000, guid: 276b9310066593e4ea49d5804b1edfd0, type: 2}
+    additiveMaterials: []
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []

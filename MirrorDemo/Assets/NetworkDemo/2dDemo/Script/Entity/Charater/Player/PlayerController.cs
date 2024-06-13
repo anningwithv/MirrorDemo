@@ -122,10 +122,10 @@ public class PlayerController : PlayerBase
             switch (m_CurState)
             {
                 case PlayerState.Idle:
-                    CmdPlayAnim("human_body_idle");
+                    CmdPlayAnim("Idle");
                     break;
                 case PlayerState.Move:
-                    CmdPlayAnim("human_body_move");
+                    CmdPlayAnim("Move");
                     break;
             }
         }

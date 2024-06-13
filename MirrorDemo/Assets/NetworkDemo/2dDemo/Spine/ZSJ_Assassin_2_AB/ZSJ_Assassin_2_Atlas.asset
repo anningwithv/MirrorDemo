@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: xiandai_leader_Atlas
+  m_Name: ZSJ_Assassin_2_Atlas
   m_EditorClassIdentifier: 
   textureLoadingMode: 0
   onDemandTextureLoader: {fileID: 0}
-  atlasFile: {fileID: 4900000, guid: bed6e8d1c49f2bb43a2e6e10f7288bb7, type: 3}
+  atlasFile: {fileID: 4900000, guid: 988cc58acb8d11d4fb7ca314e4f65136, type: 3}
   materials:
-  - {fileID: 2100000, guid: c02cadd456beb6145baf04801c278844, type: 2}
+  - {fileID: 2100000, guid: 7384b4e5c0da06c44b96e2b5a7555356, type: 2}
