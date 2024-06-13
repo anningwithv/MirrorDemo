@@ -10,18 +10,16 @@ public enum PlayerState
     Idle,
     Move,
 }
-public class PlayerController : PlayerBase
+public class PlayerController : CharacterController
 {
     public float MoveSpeed = 5;
     public GameObject TowerPrefab;
 
-    private Rigidbody2D m_Rgb; // 刚体组件
-    //private int m_FollowerCount = 0;
-    //private int m_MaxFollowerCount = 5;
-    private SkeletonAnimation m_Spine;
+    //private SkeletonAnimation m_Spine;
     private PlayerState m_CurState;
 
-    public Vector3 MoveDir { get; private set; }
+    protected PlayerWeaponController m_WeaponController;
+    protected EnemyController m_AtkTarget;
 
     #region Client
     [Client]
@@ -29,8 +27,9 @@ public class PlayerController : PlayerBase
     {
         base.Awake();
 
-        m_Rgb = GetComponent<Rigidbody2D>(); // 获取刚体组件
-        m_Spine = GetComponentInChildren<SkeletonAnimation>();
+        m_WeaponController = GetComponentInChildren<PlayerWeaponController>();
+
+        //m_Spine = GetComponentInChildren<SkeletonAnimation>();
     }
 
     public override void OnStartLocalPlayer()
@@ -44,10 +43,12 @@ public class PlayerController : PlayerBase
 
     //速度：每秒移动5个单位长度
     [Client]
-    private void Update()
+    protected override void Update()
     {
         if (!isLocalPlayer) return; //不应操作非本地玩家
-       
+
+        base.Update();
+
         Move();
 
         SearchTarget();
@@ -98,7 +99,7 @@ public class PlayerController : PlayerBase
         MoveDir = new Vector3 (Horizontal, Vertical, 0);
         MoveDir.Normalize();
 
-        m_Rgb.velocity = MoveDir * MoveSpeed; // 设置刚体速度
+        Rgb.velocity = MoveDir * MoveSpeed; // 设置刚体速度
         if (MoveDir != Vector3.zero)
         {
             SetState(PlayerState.Move);
@@ -132,6 +133,45 @@ public class PlayerController : PlayerBase
         }
     }
 
+    [Client]
+    protected void SearchTarget()
+    {
+        if (m_AtkTarget != null)
+            return;
+
+        var enemies = FindObjectsOfType<EnemyController>();
+        if (enemies.Length > 0)
+        {
+            m_AtkTarget = enemies[0];
+        }
+    }
+
+    protected float m_LastAtkTime;
+    [Client]
+    protected void Fire()
+    {
+        if (m_AtkTarget == null) return;
+
+        //if (Time.time - m_LastAtkTime > 3)
+        {
+            m_LastAtkTime = Time.time;
+
+            Vector3 fireDir = m_AtkTarget.transform.position - transform.position;
+            fireDir.Normalize();
+
+            CmdFire(fireDir, transform.position);
+        }
+    }
+
+    [Command]
+    protected void CmdFire(Vector3 dir, Vector3 position)
+    {
+        m_WeaponController.Fire(dir, position);
+        //GameObject go = GameObject.Instantiate(Bullet, position, Quaternion.identity);
+        //NetworkServer.Spawn(go);
+
+        //go.GetComponent<BulletController>().SetMoveDir(dir);
+    }
     #endregion
 
     #region Command
@@ -165,12 +205,12 @@ public class PlayerController : PlayerBase
     [ClientRpc]
     private void RpcPlayAnim(string animName)
     {
-        m_Spine.state.SetAnimation(0, animName, true);
+        m_SpineAnim.state.SetAnimation(0, animName, true);
     }
     #endregion
 
     private Vector3 m_LastMoveDir;
-    public override Vector3 GetMoveDir()
+    public Vector3 GetMoveDir()
     {
         if (MoveDir != Vector3.zero)
         {
