@@ -4,6 +4,7 @@ using Spine;
 using System.Text;
 using System;
 using Unity.Mathematics;
+using Mirror;
 
 namespace ProjectX.Logic
 {
@@ -51,7 +52,8 @@ namespace ProjectX.Logic
         }
 
        
-        private StringBuilder m_AnimNameBuilder = new StringBuilder();
+        //private StringBuilder m_AnimNameBuilder = new StringBuilder();
+        [ClientRpc]
         public TrackEntry PlayAnim(string animName, bool loop, float speed = 1)
         {
             if (m_SpineAnim == null)

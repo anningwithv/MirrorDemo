@@ -9,6 +9,8 @@ namespace ProjectX.Logic
         public override void Enter(EnemyController entity)
         {
             base.Enter(entity);
+
+            entity.AnimCom.PlayIdleAnim();
         }
 
         public override void Execute(EnemyController entity, float dt)

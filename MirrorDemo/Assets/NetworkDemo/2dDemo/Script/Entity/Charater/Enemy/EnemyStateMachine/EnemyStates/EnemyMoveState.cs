@@ -19,7 +19,7 @@ namespace ProjectX.Logic
             m_Controller = entity;
             m_Timer = m_RefrehInterval;
 
-            //m_Controller.EnemyAnimCom.PlayMoveAnim();
+            entity.AnimCom.PlayMoveAnim();
         }
 
         public override void Execute(EnemyController entity, float dt)
