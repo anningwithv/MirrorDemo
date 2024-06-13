@@ -77,22 +77,12 @@ namespace GameFrame
                 for (int i = 0; i < initCount; ++i)
                 {
                     GameObject obj = CreateNewGameObject();
-                    NetworkServer.Spawn(obj);
                     Recycle(obj);
-                    //GameObjectPoolMgr.S.GetComponent<MonoBehaviour>().StartCoroutine(SpawnObjInServer(obj));
                 }
             }
 
             m_Strategy.ProcessContainer(container);
 
-        }
-
-        private IEnumerator SpawnObjInServer(GameObject obj)
-        {
-            yield return new WaitForSeconds(0.1f);
-            NetworkServer.Spawn(obj);
-            yield return null;
-            //Recycle(obj);
         }
 
         public int currentCount
