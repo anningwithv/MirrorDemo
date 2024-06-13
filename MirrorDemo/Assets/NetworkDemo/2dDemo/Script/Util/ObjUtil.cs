@@ -24,7 +24,8 @@ public static class ObjUtil
 
         string path3 = $"{m_ObjPath}Enemy";
         GameObject enemy = Resources.Load(path3) as GameObject;
-        NetworkClient.RegisterPrefab(enemy, SpawnHandler, UnspawnHandler);
+        //NetworkClient.RegisterPrefab(enemy, SpawnHandler, UnspawnHandler);
+        NetworkClient.RegisterPrefab(enemy);
         var enemyAssetId = enemy.GetComponent<NetworkIdentity>().assetId;
         GameObjectPoolMgr.S.AddPool(enemyAssetId.ToString(), enemy, 100, 10);
 
