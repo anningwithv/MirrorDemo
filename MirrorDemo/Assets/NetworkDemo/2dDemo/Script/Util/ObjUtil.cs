@@ -7,6 +7,8 @@ using UnityEngine;
 
 public static class ObjUtil
 {
+    public static string EnemyAssetId;
+
     private static string m_ObjPath = "Prefab/";
     public static void RegisterPrefabs()
     {
@@ -24,10 +26,10 @@ public static class ObjUtil
 
         string path3 = $"{m_ObjPath}Enemy";
         GameObject enemy = Resources.Load(path3) as GameObject;
-        //NetworkClient.RegisterPrefab(enemy, SpawnHandler, UnspawnHandler);
-        NetworkClient.RegisterPrefab(enemy);
+        NetworkClient.RegisterPrefab(enemy, SpawnHandler, UnspawnHandler);
         var enemyAssetId = enemy.GetComponent<NetworkIdentity>().assetId;
         GameObjectPoolMgr.S.AddPool(enemyAssetId.ToString(), enemy, 100, 10);
+        EnemyAssetId = enemyAssetId.ToString();
 
         string path4 = $"{m_ObjPath}Bullet2";
         GameObject bullet2 = Resources.Load(path4) as GameObject;
@@ -41,6 +43,7 @@ public static class ObjUtil
         GameObject obj = GameObjectPoolMgr.S.Allocate(msg.assetId.ToString());
         obj.transform.position = msg.position;
         obj.transform.rotation = msg.rotation;
+        obj.transform.parent = ServerGameMgr.Instance.EntityRoot;
         return obj;
     }
 

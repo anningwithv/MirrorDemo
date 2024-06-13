@@ -49,9 +49,11 @@ public class ServerEnemyMgr : ServerSubMgr
                 //GameObject go = GameObjectPoolMgr.S.Allocate("Enemy") ;
 
                 string path3 = $"Prefab/Enemy";
-                GameObject enemy = Resources.Load(path3) as GameObject;
-                GameObject go = GameObject.Instantiate(enemy) as GameObject;
+                //GameObject enemy = Resources.Load(path3) as GameObject;
+                //GameObject go = GameObject.Instantiate(enemy) as GameObject;
                 //go.transform.parent = m_ServerGameMgr.EntityRoot;
+                GameObject go = GameObjectPoolMgr.S.Allocate(ObjUtil.EnemyAssetId);
+                go.transform.parent = m_ServerGameMgr.EntityRoot;
                 go.transform.position = pos;
                 go.SetActive(true);
                 NetworkServer.Spawn(go);

@@ -9,7 +9,7 @@ using Mirror;
 public class ServerGameMgr : GameMgrBase<ServerGameMgr>
 {
     public NetworkMgr NetworkMgr { get; private set; }
-    public Transform EntityRoot { get; private set; }
+    public Transform EntityRoot;
 
 
     #region Init
