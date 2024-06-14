@@ -8,6 +8,15 @@ using Mirror;
 
 namespace ProjectX.Logic
 {
+    public enum EnemyAnimState
+    {
+        Paused,
+        Resumed,
+        Idle,
+        Move,
+        Attack,
+        Dead,
+    }
     public class EnemyAnimCom : EnemyComBase
     {
         private float m_CheckDirInterval = 0.1f;
@@ -23,6 +32,9 @@ namespace ProjectX.Logic
         protected Animator m_Animator;
 
         public SkeletonAnimation SpineAnim { get => m_SpineAnim; }
+
+        [SyncVar(hook = nameof(OnAnimStateChanged))]
+        public EnemyAnimState AnimState;
 
         public EnemyAnimCom() : base()
         {
@@ -88,7 +100,6 @@ namespace ProjectX.Logic
             return track;
         }
 
-        [ClientRpc]
         public void PauseAnim()
         {
             //m_Animator.speed = 0;
@@ -96,7 +107,6 @@ namespace ProjectX.Logic
                 m_SpineAnim.AnimationState.TimeScale = 0;
         }
 
-        [ClientRpc]
         public void ResumeAnim()
         {
             //m_Animator.speed = 1;
@@ -104,35 +114,37 @@ namespace ProjectX.Logic
                 m_SpineAnim.AnimationState.TimeScale = 1;
         }
 
-        [ClientRpc]
         public void PlayIdleAnim()
         {
             if (!m_Controller.IsAlive())
                 return;
+
+            SetAnimState(EnemyAnimState.Idle);
             PlayAnim(m_AnimPrefix + m_IdleAnimName, true);
         }
 
-        [ClientRpc]
         public void PlayMoveAnim()
         {
             if (!m_Controller.IsAlive())
                 return;
+
+            SetAnimState(EnemyAnimState.Move);
             PlayAnim(m_AnimPrefix + m_MoveAnimName, true);
         }
 
-        [ClientRpc]
         private void PlayDeadAnim()
         {
             //Log.i("Enemy play dead anim");
-            ResumeAnim();
+            SetAnimState(EnemyAnimState.Dead);
             PlayAnim(m_AnimPrefix + "Die", false);
         }
 
-        [ClientRpc]
         public void PlayAttackAnim(Action onAtkTriggered, Action onEnd)
         {
             if (!m_Controller.IsAlive())
                 return;
+
+            SetAnimState(EnemyAnimState.Attack);
 
             var track = PlayAnim(m_AnimPrefix + "Attack", false, 1.5f);
 
@@ -151,6 +163,30 @@ namespace ProjectX.Logic
                     onEnd?.Invoke();
                     PlayIdleAnim();
                 };
+        }
+
+        private void SetAnimState(EnemyAnimState state)
+        {
+            AnimState = state;
+        }
+
+        /// <summary>
+        /// Run in client, sync animation
+        /// </summary>
+        private void OnAnimStateChanged(EnemyAnimState oldState, EnemyAnimState newState)
+        { 
+            switch (newState)
+            {
+                case EnemyAnimState.Idle:
+                    PlayIdleAnim();
+                    break;
+                case EnemyAnimState.Move:
+                    PlayMoveAnim();
+                    break;
+                case EnemyAnimState.Attack:
+                    PlayAttackAnim(null, null);
+                    break;
+            }
         }
     }
 }
