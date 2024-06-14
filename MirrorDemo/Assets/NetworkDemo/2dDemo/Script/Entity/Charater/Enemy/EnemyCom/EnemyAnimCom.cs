@@ -5,6 +5,7 @@ using System.Text;
 using System;
 using Unity.Mathematics;
 using Mirror;
+using GameFrame;
 
 namespace ProjectX.Logic
 {
@@ -33,8 +34,6 @@ namespace ProjectX.Logic
 
         public SkeletonAnimation SpineAnim { get => m_SpineAnim; }
 
-        [SyncVar(hook = nameof(OnAnimStateChanged))]
-        public EnemyAnimState AnimState;
 
         public EnemyAnimCom() : base()
         {
@@ -167,26 +166,7 @@ namespace ProjectX.Logic
 
         private void SetAnimState(EnemyAnimState state)
         {
-            AnimState = state;
-        }
-
-        /// <summary>
-        /// Run in client, sync animation
-        /// </summary>
-        private void OnAnimStateChanged(EnemyAnimState oldState, EnemyAnimState newState)
-        { 
-            switch (newState)
-            {
-                case EnemyAnimState.Idle:
-                    PlayIdleAnim();
-                    break;
-                case EnemyAnimState.Move:
-                    PlayMoveAnim();
-                    break;
-                case EnemyAnimState.Attack:
-                    PlayAttackAnim(null, null);
-                    break;
-            }
+            m_Controller.AnimState = state;
         }
     }
 }

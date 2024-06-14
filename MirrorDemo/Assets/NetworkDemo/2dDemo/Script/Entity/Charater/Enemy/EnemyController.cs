@@ -18,6 +18,8 @@ public class EnemyController : CharacterController
 
     public EnemyFindTargetCom FindTargetCom { get; private set; }
     public EnemyAnimCom AnimCom { get; private set; }
+    [SyncVar(hook = nameof(OnAnimStateChanged))]
+    public EnemyAnimState AnimState;
 
     #region Server
 
@@ -103,4 +105,24 @@ public class EnemyController : CharacterController
     #endregion
 
     #endregion
+
+    /// <summary>
+    /// Run in client, sync animation
+    /// </summary>
+    private void OnAnimStateChanged(EnemyAnimState oldState, EnemyAnimState newState)
+    {
+        Log.i($"On Anim state changed: {newState}");
+        switch (newState)
+        {
+            case EnemyAnimState.Idle:
+                AnimCom.PlayIdleAnim();
+                break;
+            case EnemyAnimState.Move:
+                AnimCom.PlayMoveAnim();
+                break;
+            case EnemyAnimState.Attack:
+                AnimCom.PlayAttackAnim(null, null);
+                break;
+        }
+    }
 }
