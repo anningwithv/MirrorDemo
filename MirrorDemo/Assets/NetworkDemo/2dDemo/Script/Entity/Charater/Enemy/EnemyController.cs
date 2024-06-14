@@ -12,7 +12,6 @@ public class EnemyController : CharacterController
 {
     private PlayerController m_Target;
     private float m_MoveSpeed = 1f;
-    private Rigidbody2D m_Rigidbody;
 
     protected EnemyStateMachine m_StateMachine;
     protected EnemyState m_CurState;
@@ -23,18 +22,22 @@ public class EnemyController : CharacterController
     #region Server
 
     #region FrameFunc
-    public override void OnStartServer()
+    protected override void Awake()
     {
-        base.OnStartServer();
+        base.Awake();
 
         //Init coms
-        FindTargetCom = RegisterCom<EnemyFindTargetCom>();  
+        FindTargetCom = RegisterCom<EnemyFindTargetCom>();
         AnimCom = RegisterCom<EnemyAnimCom>();
         AnimCom.Init(m_SpineAnim);
         HealthCom.InitHealth(50);
 
         //Init params
-        m_Rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
 
         //Init state machine
         if (m_StateMachine == null)
@@ -89,7 +92,7 @@ public class EnemyController : CharacterController
         dir = dir.normalized;
         dir.z = 0;
 
-        m_Rigidbody.velocity = dir * m_MoveSpeed;
+        Rgb.velocity = dir * m_MoveSpeed;
     }
 
     [Server]
