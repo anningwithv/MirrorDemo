@@ -10,8 +10,31 @@ namespace ProjectX.Logic
 {
     public class FloatingText : NetworkBehaviour
     {
-        [ClientRpc]
+        [SyncVar]
+        private Color m_Color;
+        [SyncVar]
+        private string m_Text;
+        [SyncVar]
+        private Vector3 m_Pos;
+
+        /// <summary>
+        /// Call in server
+        /// </summary>
         public void Init(Color color, string text, Vector3 pos)
+        {
+            m_Color = color;
+            m_Text = text;
+            m_Pos = pos;
+        }
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+
+            Show();
+        }
+
+        private void Show()
         {
             TextMeshPro textMeshPro;
 
@@ -23,14 +46,14 @@ namespace ProjectX.Logic
             textMeshPro.sortingOrder = 1;
             //textMeshPro.rectTransform.sizeDelta = new Vector2(1.2f, 0.6f);
 
-            floatingText.transform.position = pos;
+            floatingText.transform.position = m_Pos;
 
-            textMeshPro.color = color;
+            textMeshPro.color = m_Color;
             textMeshPro.fontSize = 4;
             //textMeshPro.enableExtraPadding = true;
             //textMeshPro.enableShadows = false;
             textMeshPro.enableKerning = false;
-            textMeshPro.text = text;
+            textMeshPro.text = m_Text;
 
             //BattleMgr.Instance.LevelRoot.Mono.StartCoroutine(DisplayTextMeshProFloatingText(textMeshPro));
             textMeshPro.rectTransform.localScale = Vector3.one;

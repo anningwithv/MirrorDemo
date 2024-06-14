@@ -14,8 +14,8 @@ namespace ProjectX.Logic
         {
             string assetId = ObjUtil.GetAssetId(Define.ASSET_EFFECT_POP_TEXT);
             var floatingText = GameObjectPoolMgr.S.Allocate(assetId);
-            floatingText.GetComponent<FloatingText>()?.Init(colorCur, text, pos);
             NetworkServer.Spawn(floatingText);
+            floatingText.GetComponent<FloatingText>()?.Init(colorCur, text, pos);
 
             return floatingText;
         }
