@@ -14,7 +14,8 @@ namespace ProjectX.Logic
         {
             TextMeshPro textMeshPro;
 
-            var floatingText = GameObjectPoolMgr.S.Allocate(Define.ASSET_EFFECT_POP_TEXT.ToLower());
+            string assetId = ObjUtil.GetAssetId(Define.ASSET_EFFECT_POP_TEXT);
+            var floatingText = GameObjectPoolMgr.S.Allocate(assetId);
             //floatingText.name = text;
             floatingText.transform.SetParent(ServerGameMgr.Instance.EntityRoot);
             floatingText.SetActive(true);
