@@ -27,7 +27,8 @@ public static class ObjUtil
             "BulletTower",
             "Enemy",
             "Bullet2",
-            "BuildingTower"
+            "BuildingTower",
+            "Effect_Poptext",
         };
 
         foreach (var item in prefabNameList)

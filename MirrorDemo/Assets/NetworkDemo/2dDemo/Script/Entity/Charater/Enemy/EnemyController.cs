@@ -75,6 +75,8 @@ public class EnemyController : CharacterController
     {
         HealthCom.AddHealth(-damage);
 
+        FloatingTextUtil.CreateText($"<b>{damage}</b>", transform.position + new Vector3(0, 1, 0), Color.red);
+
         if (!HealthCom.IsAlive())
         {
             GameObjectPoolMgr.S.Recycle(gameObject);

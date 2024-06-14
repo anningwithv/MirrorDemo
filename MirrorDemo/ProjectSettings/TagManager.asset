@@ -48,3 +48,6 @@ TagManager:
   - name: Bullet
     uniqueID: 66337475
     locked: 0
+  - name: Floating
+    uniqueID: 4231552087
+    locked: 0
