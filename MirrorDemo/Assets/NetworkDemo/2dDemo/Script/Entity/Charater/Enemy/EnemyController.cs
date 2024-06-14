@@ -78,6 +78,7 @@ public class EnemyController : CharacterController
         if (!HealthCom.IsAlive())
         {
             GameObjectPoolMgr.S.Recycle(gameObject);
+            NetworkServer.UnSpawn(gameObject);
         }
     }
 

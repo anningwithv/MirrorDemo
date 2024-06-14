@@ -230,6 +230,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   AnimState: 0
+  HpPercent: 0
 --- !u!50 &5601696170343498850
 Rigidbody2D:
   serializedVersion: 4
@@ -321,6 +322,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HpBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259056191895259959, guid: 9197277396706d447a75302c34352c4e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259056191895259959, guid: 9197277396706d447a75302c34352c4e,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 208808867
       objectReference: {fileID: 0}
     - target: {fileID: 8032755228329495425, guid: 9197277396706d447a75302c34352c4e,
         type: 3}
