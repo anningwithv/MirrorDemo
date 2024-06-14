@@ -131,6 +131,8 @@ public abstract class CharacterController : NetworkBehaviour, ICharacterComOwner
         return HealthCom.IsAlive();
     }
 
+    public virtual void RefreshHpPercent(float percent) { }
+
     public void MoveToPos(Vector3 targetPos)
     {
         var dir = targetPos - transform.position;

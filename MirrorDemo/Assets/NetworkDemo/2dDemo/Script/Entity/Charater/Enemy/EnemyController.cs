@@ -6,20 +6,23 @@ using GameFrame;
 using ProjectX.Logic;
 
 /// <summary>
-/// Enemy is Server obj
+/// Enemy logic run in Server and sync value to client
 /// </summary>
 public class EnemyController : CharacterController
 {
-    private PlayerController m_Target;
-    private float m_MoveSpeed = 1f;
-
     protected EnemyStateMachine m_StateMachine;
     protected EnemyState m_CurState;
 
     public EnemyFindTargetCom FindTargetCom { get; private set; }
     public EnemyAnimCom AnimCom { get; private set; }
+    
+    #region SyncVar
     [SyncVar(hook = nameof(OnAnimStateChanged))]
     public EnemyAnimState AnimState;
+
+    [SyncVar(hook = nameof(OnHpChanged))]
+    public float HpPercent;
+    #endregion
 
     #region Server
 
@@ -53,8 +56,6 @@ public class EnemyController : CharacterController
         base.Update();
 
         UpdateStateMachine(Time.deltaTime);
-
-        MoveToTarget();
     }
     #endregion
 
@@ -73,29 +74,22 @@ public class EnemyController : CharacterController
     public void OnAttacked(float damage)
     {
         HealthCom.AddHealth(-damage);
+
         if (!HealthCom.IsAlive())
         {
             GameObjectPoolMgr.S.Recycle(gameObject);
         }
     }
+
+    public override void RefreshHpPercent(float percent)
+    {
+        base.RefreshHpPercent(percent);
+
+        HpPercent = percent;
+    }
     #endregion
 
     #region Private
-
-    [Server]
-    private void MoveToTarget()
-    {
-        if(m_Target == null)
-        {
-            return;
-        }
-
-        var dir = m_Target.transform.position - transform.position;
-        dir = dir.normalized;
-        dir.z = 0;
-
-        Rgb.velocity = dir * m_MoveSpeed;
-    }
 
     [Server]
     private void UpdateStateMachine(float dt)
@@ -106,6 +100,7 @@ public class EnemyController : CharacterController
 
     #endregion
 
+    #region Hook func
     /// <summary>
     /// Run in client, sync animation
     /// </summary>
@@ -125,4 +120,11 @@ public class EnemyController : CharacterController
                 break;
         }
     }
+
+    private void OnHpChanged(float oldHp, float newHp)
+    {
+        HealthCom.RefreshHpBar(newHp);
+    }
+
+    #endregion
 }

@@ -10,5 +10,7 @@ namespace ProjectX.Logic
 
         Transform Transform { get; }
 
+        void RefreshHpPercent(float percent);
+
     }
 }
