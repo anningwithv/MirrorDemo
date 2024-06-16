@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1150390627478894268}
   - component: {fileID: 7041212817503257992}
   - component: {fileID: 7165027363978769600}
+  - component: {fileID: 1936815746770069053}
   m_Layer: 0
   m_Name: Effect_Poptext
   m_TagString: Untagged
@@ -238,3 +239,18 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!114 &1936815746770069053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3440448388058976426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30373578dde3631469ef86bf5e2265a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
