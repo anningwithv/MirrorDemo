@@ -21,40 +21,25 @@ public class PlayerController : CharacterController
     protected PlayerWeaponController m_WeaponController;
     protected EnemyController m_AtkTarget;
 
-    #region Client
-    [Client]
     protected override void Awake()
     {
         base.Awake();
 
         HealthCom.InitHealth(100);
-
         m_WeaponController = GetComponentInChildren<PlayerWeaponController>();
 
         //m_Spine = GetComponentInChildren<SkeletonAnimation>();
     }
 
-    public override void OnStartLocalPlayer()
-    {
-        base.OnStartLocalPlayer();
-
-        //摄像机与角色绑定
-        Camera.main.transform.SetParent(transform);
-        Camera.main.transform.localPosition = new Vector3(0, 0, Camera.main.transform.position.z);
-    }
-
-    //速度：每秒移动5个单位长度
-    [Client]
     protected override void Update()
     {
-        if (!isLocalPlayer) return; //不应操作非本地玩家
-
         base.Update();
 
-        Move();
+        if (!isLocalPlayer) return; //不应操作非本地玩家
 
+        //Codes only run in client
+        Move();
         SearchTarget();
-        //Fire();
 
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -65,7 +50,17 @@ public class PlayerController : CharacterController
         {
             Fire();
         }
-        //AddFollower();
+    }
+
+
+    #region Client
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+
+        //摄像机与角色绑定
+        Camera.main.transform.SetParent(transform);
+        Camera.main.transform.localPosition = new Vector3(0, 0, Camera.main.transform.position.z);
     }
 
     [Client]
@@ -188,6 +183,10 @@ public class PlayerController : CharacterController
     [Command]
     private void CmdPlayAnim(string animName)
     {
+        //Play anim in server
+        PlayAnim(animName);
+
+        //Play anim in all clients
         RpcPlayAnim(animName);
     }
 
@@ -207,9 +206,14 @@ public class PlayerController : CharacterController
     [ClientRpc]
     private void RpcPlayAnim(string animName)
     {
-        m_SpineAnim.state.SetAnimation(0, animName, true);
+        PlayAnim(animName);
     }
     #endregion
+
+    private void PlayAnim(string animName)
+    {
+        m_SpineAnim.state.SetAnimation(0, animName, true);
+    }
 
     private Vector3 m_LastMoveDir;
     public Vector3 GetMoveDir()

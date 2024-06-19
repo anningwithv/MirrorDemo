@@ -41,9 +41,12 @@ public abstract class CharacterController : NetworkBehaviour, ICharacterComOwner
     {
         try
         {
-            foreach (var item in m_ComDic)
+            if (m_ComDic != null)
             {
-                item.Value.OnStart();
+                foreach (var item in m_ComDic)
+                {
+                    item.Value.OnStart();
+                }
             }
         }
         catch (Exception e)

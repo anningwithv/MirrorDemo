@@ -109,7 +109,7 @@ public class EnemyController : CharacterController
     /// </summary>
     private void OnAnimStateChanged(EnemyAnimState oldState, EnemyAnimState newState)
     {
-        Log.i($"On Anim state changed: {newState}");
+        //Log.i($"On Anim state changed: {newState}");
         switch (newState)
         {
             case EnemyAnimState.Idle:
