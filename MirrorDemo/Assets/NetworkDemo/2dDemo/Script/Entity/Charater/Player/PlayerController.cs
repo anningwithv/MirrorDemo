@@ -21,6 +21,9 @@ public class PlayerController : CharacterController
     protected PlayerWeaponController m_WeaponController;
     protected EnemyController m_AtkTarget;
 
+    [SyncVar(hook = nameof(OnFaceDirChanged))]
+    private int m_FaceToDir;
+
     protected override void Awake()
     {
         base.Awake();
@@ -107,8 +110,21 @@ public class PlayerController : CharacterController
         }
         if (Horizontal != 0)
         {
-            transform.GetChild(0).localScale = new Vector3(-Horizontal, 1, 1); // 翻转角色
+            int dir = -(int)Horizontal;
+            SetFaceDir(dir);
+            CmdChangeFaceDir(dir);
         }
+    }
+
+    [Client]
+    private void SetFaceDir(int dir)
+    {
+        transform.GetChild(0).localScale = new Vector3(dir, 1, 1); // 翻转角色
+    }
+
+    private void OnFaceDirChanged(int oldDir, int newDir)
+    {
+        SetFaceDir(newDir);
     }
 
     [Client]
@@ -160,6 +176,9 @@ public class PlayerController : CharacterController
         }
     }
 
+    #endregion
+
+    #region Command
     [Command]
     protected void CmdFire(Vector3 dir, Vector3 position)
     {
@@ -169,9 +188,16 @@ public class PlayerController : CharacterController
 
         //go.GetComponent<BulletController>().SetMoveDir(dir);
     }
-    #endregion
 
-    #region Command
+    [Command]
+    protected void CmdChangeFaceDir(int dir)
+    {
+        
+        //GameObject go = GameObject.Instantiate(Bullet, position, Quaternion.identity);
+        //NetworkServer.Spawn(go);
+
+        //go.GetComponent<BulletController>().SetMoveDir(dir);
+    }
     //[Command]
     //private void CmdSpawnFollower()
     //{

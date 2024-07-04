@@ -3316,7 +3316,7 @@ GameObject:
   - component: {fileID: 884517028}
   - component: {fileID: 884517031}
   m_Layer: 0
-  m_Name: ServerGameMgr
+  m_Name: GameMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5894,7 +5894,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398816177}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1398816180
 Camera:
   m_ObjectHideFlags: 0
