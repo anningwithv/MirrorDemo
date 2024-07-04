@@ -116,12 +116,6 @@ public class PlayerController : CharacterController
         }
     }
 
-    [Client]
-    private void SetFaceDir(int dir)
-    {
-        transform.GetChild(0).localScale = new Vector3(dir, 1, 1); // 翻转角色
-    }
-
     private void OnFaceDirChanged(int oldDir, int newDir)
     {
         SetFaceDir(newDir);
@@ -193,6 +187,7 @@ public class PlayerController : CharacterController
     protected void CmdChangeFaceDir(int dir)
     {
         m_FaceToDir = dir;
+        SetFaceDir(dir);
         //GameObject go = GameObject.Instantiate(Bullet, position, Quaternion.identity);
         //NetworkServer.Spawn(go);
 
@@ -236,6 +231,13 @@ public class PlayerController : CharacterController
     }
     #endregion
 
+    #region Common
+    private void SetFaceDir(int dir)
+    {
+        transform.GetChild(0).localScale = new Vector3(dir, 1, 1); // 翻转角色
+    }
+
+
     private void PlayAnim(string animName)
     {
         m_SpineAnim.state.SetAnimation(0, animName, true);
@@ -252,4 +254,5 @@ public class PlayerController : CharacterController
 
         return m_LastMoveDir;
     }
+    #endregion
 }
