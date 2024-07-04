@@ -192,7 +192,7 @@ public class PlayerController : CharacterController
     [Command]
     protected void CmdChangeFaceDir(int dir)
     {
-        
+        m_FaceToDir = dir;
         //GameObject go = GameObject.Instantiate(Bullet, position, Quaternion.identity);
         //NetworkServer.Spawn(go);
 
